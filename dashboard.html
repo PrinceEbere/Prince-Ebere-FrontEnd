@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="js/dashboard.js"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #6fb1fc, #4364f7);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .top-buttons {
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+      padding: 20px;
+    }
+
+    .button-link {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-link:hover {
+      background-color: #2980b9;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 30px auto 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .room-images {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .room-images h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .room-images-grid {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .room-type {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .room-type img {
+      width: 180px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .room-type img:hover {
+      transform: scale(1.05);
+    }
+
+    .room-type p {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, select, textarea {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .animated-button {
+      background-color: #2ecc71;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .animated-button:hover {
+      background-color: #27ae60;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="top-buttons">
+    <a href="index.html" class="button-link">Back to Home</a>
+    <a href="login.html" class="button-link">Back to Login</a>
+  </div>
+
+  <div class="container">
+    <h1>Apply for a Room</h1>
+
+    <!-- Room Images Section -->
+    <div class="room-images">
+      <h3>Available Room Types</h3>
+      <div class="room-images-grid">
+        <div class="room-type">
+          <img src="sin a.c room.jpeg" alt="Single Room with AC">
+          <p>Single Room with AC</p>
+        </div>
+        <div class="room-type">
+          <img src="double ac room.jpeg" alt="Double Room with AC">
+          <p>Double Room with AC</p>
+        </div>
+        <div class="room-type">
+          <img src="double fan room.jpeg" alt="Double Room with Fan">
+          <p>Double Room with Fan</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Application Form -->
+    <form id="applicationForm">
+      <input type="text" id="studentId" placeholder="Student ID" required>
+      <input type="email" id="email" placeholder="Email" required>
+
+      <select id="roomType" required>
+        <option value="">Select Room Type</option>
+        <option value="Single Room with AC">Single Room with AC</option>
+        <option value="Double Room with AC">Double Room with AC</option>
+        <option value="Double Room with Fan">Double Room with Fan</option>
+      </select>
+
+      <select id="roomNumber" required>
+        <option value="">Select Room Number</option>
+      </select>
+
+      <textarea id="reason" placeholder="Reason for applying" required></textarea>
+
+      <button type="submit" class="animated-button">Submit Application</button>
+    </form>
+  </div>
+
+  <script>
+    const rooms = {
+      "Single Room with AC": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+      "Double Room with AC": ["11", "12", "13", "14", "15", "16", "17", "18", "19", "20"],
+      "Double Room with Fan": ["21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
+    };
+
+    document.getElementById("roomType").addEventListener("change", function() {
+      const roomType = this.value;
+      const roomNumberSelect = document.getElementById("roomNumber");
+      
+      roomNumberSelect.innerHTML = '<option value="">Select Room Number</option>';
+
+      if (rooms[roomType]) {
+        rooms[roomType].forEach(roomNumber => {
+          const option = document.createElement("option");
+          option.value = roomNumber;
+          option.textContent = `Room ${roomNumber}`;
+          roomNumberSelect.appendChild(option);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
